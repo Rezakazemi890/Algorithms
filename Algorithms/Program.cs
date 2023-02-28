@@ -57,7 +57,7 @@
                               + FibonaccianSearchResult);
         #endregion
 
-        #region Selection sort Test O(n^2)
+        #region Selection sort Test O(n^2)        
 
         Console.WriteLine(
             "Selection Sort O(n^2): " +
@@ -69,6 +69,8 @@
 
         #region Bubble Sort O(n^2)
 
+        unSortedArr = new int[] { 24, 3, 44, 10, 78, 1, 2 };
+
         Console.WriteLine(
             "Bubble Sort O(n^2): " +
             BubbleSort(unSortedArr)
@@ -77,7 +79,17 @@
 
         #endregion
 
-        
+        #region Insertation Sort O(n^2)
+
+        unSortedArr = new int[] { 24, 3, 44, 10, 78, 1, 2 };
+
+        Console.WriteLine(
+            "Insertation Sort O(n^2): " +
+            InsertationSort(unSortedArr)
+            .Select(x => x.ToString())
+            .Aggregate((c, n) => c + ',' + n));
+
+        #endregion
 
         Console.ReadLine();
     }
@@ -288,6 +300,33 @@
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
+        return arr;
+    }
+
+    /// <summary>
+    /// InsertationSort
+    /// </summary>
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    public static int[] InsertationSort(int[] arr)
+    {
+        int length = arr.Length;
+        for (int i = 1; i < length; ++i)
+        {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Move elements of arr[0..i-1],
+            // that are greater than key,
+            // to one position ahead of
+            // their current position
+            while (j >= 0 && arr[j] > key)
+            {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
         return arr;
     }
 }

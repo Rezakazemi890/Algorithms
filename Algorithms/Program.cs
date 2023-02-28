@@ -3,6 +3,7 @@
     public static void Main()
     {
         int[] arr = { 2, 3, 4, 10, 40 };
+        int[] unSortedArr = { 24, 3, 44, 10, 78, 1, 2 };
         int x = 10;
 
         #region Linear Search Test O(n)
@@ -45,7 +46,7 @@
                               + binarySearchRecursiveResult);
         #endregion
 
-        #region FibonaccianSearch
+        #region FibonaccianSearch Test O(Log n)
 
         int FibonaccianSearchResult = FibonaccianSearch(arr, x, arr.Length);
         if (FibonaccianSearchResult == -1)
@@ -54,6 +55,15 @@
         else
             Console.WriteLine("FibonaccianSearch O(Log n): Element is present at index "
                               + FibonaccianSearchResult);
+        #endregion
+
+        #region Selection sort
+        Console.WriteLine(
+            "Selection Sort O(n^2): " +
+            SelectionSort(unSortedArr)
+            .Select(x => x.ToString())
+            .Aggregate((c, n) => c + ',' + n));
+
         #endregion
 
         Console.ReadLine();
@@ -223,5 +233,28 @@
 
         /*element not found. return -1 */
         return -1;
+    }
+
+
+    public static int[] SelectionSort(int[] arr)
+    {
+        int length = arr.Length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < length - 1; i++)
+        {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < length; j++)
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+
+            // Swap the found minimum element with the first
+            // element
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
     }
 }

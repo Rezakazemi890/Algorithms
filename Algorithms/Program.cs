@@ -57,7 +57,8 @@
                               + FibonaccianSearchResult);
         #endregion
 
-        #region Selection sort
+        #region Selection sort Test O(n^2)
+
         Console.WriteLine(
             "Selection Sort O(n^2): " +
             SelectionSort(unSortedArr)
@@ -65,6 +66,18 @@
             .Aggregate((c, n) => c + ',' + n));
 
         #endregion
+
+        #region Bubble Sort O(n^2)
+
+        Console.WriteLine(
+            "Bubble Sort O(n^2): " +
+            BubbleSort(unSortedArr)
+            .Select(x => x.ToString())
+            .Aggregate((c, n) => c + ',' + n));
+
+        #endregion
+
+        
 
         Console.ReadLine();
     }
@@ -255,6 +268,26 @@
             arr[min_idx] = arr[i];
             arr[i] = temp;
         }
+        return arr;
+    }
+
+    /// <summary>
+    /// BubbleSort
+    /// </summary>
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    public static int[] BubbleSort(int[] arr)
+    {
+        int length = arr.Length;
+        for (int i = 0; i < length - 1; i++)
+            for (int j = 0; j < length - i - 1; j++)
+                if (arr[j] > arr[j + 1])
+                {
+                    // swap temp and arr[i]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
         return arr;
     }
 }
